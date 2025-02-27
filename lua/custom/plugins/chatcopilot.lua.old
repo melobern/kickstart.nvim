@@ -1,0 +1,35 @@
+return {
+  'CopilotC-Nvim/CopilotChat.nvim',
+  branch = 'main',
+  dependencies = {
+    'github/copilot.vim',
+    'nvim-lua/plenary.nvim',
+  },
+  build = 'make tiktoken',
+  cmd = 'CopilotChat',
+  event = 'VeryLazy',
+  config = function()
+    local chat = require 'CopilotChat'
+    chat.setup {
+      auto_insert_mode = true,
+      question_header = ' User ',
+      answer_header = ' Copilot ',
+      window = {
+        width = 0.4,
+      },
+    }
+
+    vim.api.nvim_create_autocmd('BufEnter', {
+      pattern = 'copilot-chat',
+      callback = function()
+        vim.opt_local.relativenumber = false
+        vim.opt_local.number = false
+      end,
+    })
+  end,
+  keys = {
+    { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code' },
+    { '<leader>cct', '<cmd>CopilotChatTests<cr>', desc = 'CopilotChat - Generate tests' },
+    { '<leader>ccv', '<cmd>CopilotChatToggle<cr>', desc = 'CopilotChat - Toggle Vsplit' },
+  },
+}
