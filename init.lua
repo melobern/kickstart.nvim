@@ -758,10 +758,21 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'autopep8', 'black' },
+        python = { 'ruff_format', 'isort', 'autopep8' }, --'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      },
+      formatters = {
+        isort = {
+          prepend_args = { '--line-length=120' },
+        },
+        autopep8 = {
+          prepend_args = { '--max-line-length=120' },
+        },
+        ruff_format = {
+          prepend_args = { '--line-length=120' },
+        },
       },
     },
   },
