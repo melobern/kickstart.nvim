@@ -763,6 +763,9 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        java = { 'google-java-format' }, --  java -jar ~/.local/bin/google-java-format-1.28.0-all-deps.jar
+        markdown = { 'prettier', 'markdownlint-cli2' },
+        ['markdown.mdx'] = { 'prettier', 'markdownlint-cli2' },
       },
       formatters = {
         -- isort = {
@@ -772,7 +775,13 @@ require('lazy').setup({
         --   prepend_args = { '--max-line-length=120' },
         -- },
         ruff_format = {
-          prepend_args = { '--line-length=120' },
+          command = 'ruff',
+          args = { 'format', '--stdin-filename', '$FILENAME', '-' }, -- Sous-commande explicite
+          append_args = { '--line-length=120' }, -- <-- Remplace prepend_args par append_args
+        },
+        ['google-java-format'] = {
+          command = 'java',
+          args = { '-jar', '~/.local/bin/google-java-format-1.28.0-all-deps.jar' },
         },
       },
     },
