@@ -1,4 +1,4 @@
--- File: ~/.config/nvim/lua/custom/plugins/42header.lua
-return {
-  'sindrets/diffview.nvim',
-}
+-- diffview.lua
+vim.pack.add({
+  'https://github.com/sindrets/diffview.nvim',
+})

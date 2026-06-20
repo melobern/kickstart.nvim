@@ -1,5 +1,4 @@
--- File: ~/.config/nvim/lua/custom/plugins/fugitive.lua
-return {
-	'tpope/vim-fugitive',
-  config = function() end,
-}
+-- fugitive.lua
+vim.pack.add({
+  'https://github.com/tpope/vim-fugitive',
+})
